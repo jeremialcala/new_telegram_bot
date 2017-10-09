@@ -1,0 +1,5 @@
+requests==2.10.0
+telegram
+future>=0.16.0
+certifi
+urllib3
