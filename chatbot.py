@@ -9,7 +9,7 @@ from flask import Flask, request
 import os
 
 # Enable logging
-logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+logging.basicConfig(format=' - %(levelname)s - %(message)s',
                     level=logging.INFO)
 
 app = Flask(__name__)
@@ -92,8 +92,7 @@ def bot_resp(bot, respuesta=""):
         update_id = update.update_id + 1
         if update.message:  # your bot can receive updates without messages
             # Reply to the message
-            logger.info("New message " + "from: " + str(update.message.chat.id) + bs + str(update.message.chat.first_name
-                                                                                           + bs + update.message.chat.last_name))
+            logger.info("New message " + "from: " + str(update.message.chat))
             # logger.info(json.dumps(str(update.message), sort_keys=False, indent=4, separators=(',', ': ')))
             recep = update.message.chat.first_name
             tags = []
