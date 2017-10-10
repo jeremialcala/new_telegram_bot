@@ -65,7 +65,9 @@ respuesta = ""
 def main():
     global update_id
     # Telegram Bot Authorization Token
-    bot = telegram.Bot(os.environ['TOKEN'])
+    bot = telegram.Bot('347715594:AAFxTVbmmV1pLhXAmnXLd72XWnxyYxqwlvE')
+
+    # bot = telegram.Bot(os.environ['TOKEN'])
 
     # get the first pending update_id, this is so we can skip over it in case
     # we get an "Unauthorized" exception.
