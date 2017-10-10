@@ -9,7 +9,7 @@ from flask import Flask, request
 import os
 
 # Enable logging
-logging.basicConfig(format=' - %(levelname)s - %(message)s',
+logging.basicConfig(format='- %(levelname)s - %(message)s',
                     level=logging.INFO)
 
 app = Flask(__name__)
@@ -67,14 +67,10 @@ def main():
     # Telegram Bot Authorization Token
     bot = telegram.Bot('347715594:AAFxTVbmmV1pLhXAmnXLd72XWnxyYxqwlvE')
 
-    # get the first pending update_id, this is so we can skip over it in case
-    # we get an "Unauthorized" exception.
     try:
         update_id = bot.get_updates()[0].update_id
-
     except IndexError:
         update_id = None
-
     while True:
         try:
             bot_resp(bot)
@@ -92,7 +88,8 @@ def bot_resp(bot, respuesta=""):
         update_id = update.update_id + 1
         if update.message:  # your bot can receive updates without messages
             # Reply to the message
-            logger.info("New message " + "from: " + str(update.message.chat))
+            logger.info("New message: " + str(update.message.chat))
+
             # logger.info(json.dumps(str(update.message), sort_keys=False, indent=4, separators=(',', ': ')))
             recep = update.message.chat.first_name
             tags = []
@@ -175,4 +172,5 @@ def bot_resp(bot, respuesta=""):
 
 if __name__ == '__main__':
     logger.info("Starting - BOT")
+    logger.info("TOKEN: " + os.environ['TOKEN'])
     main()
