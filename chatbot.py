@@ -5,11 +5,13 @@ from time import sleep
 import random
 import json
 from random import randint
+from flask import Flask, request
 
 # Enable logging
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
                     level=logging.INFO)
 
+app = Flask(__name__)
 logger = logging.getLogger(__name__)
 update_id = None
 sticker = ['CAADAgADXgcAAnlc4gneIyGzwWLmPQI', 'CAADAQADFwADyIsGAAF1CK9t7qjAigI', 'CAADAQADIQADyIsGAAHaCFln7THl9QI',
@@ -172,3 +174,4 @@ def bot_resp(bot, respuesta=""):
 if __name__ == '__main__':
     logger.info("Starting - BOT")
     main()
+    app.run(port=5050, debug=False)
