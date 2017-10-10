@@ -9,7 +9,7 @@ from flask import Flask, request
 import os
 
 # Enable logging
-logging.basicConfig(format='- %(levelname)s - %(message)s',
+logging.basicConfig(format='%(asctime)s - %(levelname)s - %(message)s',
                     level=logging.INFO)
 
 app = Flask(__name__)
