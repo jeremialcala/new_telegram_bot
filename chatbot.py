@@ -64,6 +64,7 @@ respuesta = ""
 
 def main():
     global update_id
+    app.run(port=5050, debug=False)
     # Telegram Bot Authorization Token
     bot = telegram.Bot('347715594:AAFxTVbmmV1pLhXAmnXLd72XWnxyYxqwlvE')
 
@@ -170,7 +171,21 @@ def bot_resp(bot, respuesta=""):
             # update.message.reply_text(youtube)
 
 
+@app.route('/', methods=['GET'])
+def verify():
+    # when the endpoint is registered as a webhook, it must echo back
+    # the 'hub.challenge' value it receives in the query arguments
+    if request.args.get("hub.mode") == "subscribe" and request.args.get("hub.challenge"):
+        if not request.args.get("hub.verify_token") == os.environ["VERIFY_TOKEN"]:
+            return "Verification token mismatch", 403
+        return request.args["hub.challenge"], 200
+
+    return "Hello world", 200
+
+
+
 if __name__ == '__main__':
     logger.info("Starting - BOT")
     logger.info("TOKEN: " + os.environ['TOKEN'])
     main()
+
