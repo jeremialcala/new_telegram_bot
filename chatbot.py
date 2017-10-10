@@ -65,10 +65,8 @@ respuesta = ""
 
 def main():
     global update_id
-    # app.run(port=5050, debug=False)
     # Telegram Bot Authorization Token
     bot = telegram.Bot('347715594:AAFxTVbmmV1pLhXAmnXLd72XWnxyYxqwlvE')
-
     try:
         update_id = bot.get_updates()[0].update_id
     except IndexError:
@@ -187,6 +185,5 @@ def verify():
 if __name__ == '__main__':
     logger.info("Starting - BOT")
     logger.info("TOKEN: " + os.environ['TOKEN'])
-    app.run(port=5050, debug=False)
-    # main()
+    main()
 
