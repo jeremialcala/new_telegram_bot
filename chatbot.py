@@ -92,7 +92,8 @@ def bot_resp(bot, respuesta=""):
         update_id = update.update_id + 1
         if update.message:  # your bot can receive updates without messages
             # Reply to the message
-            logger.info("New message " + "from: " + str(update.message.chat.id))
+            logger.info("New message " + "from: " + str(update.message.chat.id) + bs + str(update.message.chat.first_name
+                                                                                           + bs + update.message.chat.last_name))
             # logger.info(json.dumps(str(update.message), sort_keys=False, indent=4, separators=(',', ': ')))
             recep = update.message.chat.first_name
             tags = []
