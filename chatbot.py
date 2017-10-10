@@ -64,7 +64,7 @@ respuesta = ""
 
 def main():
     global update_id
-    app.run(port=5050, debug=False)
+    # app.run(port=5050, debug=False)
     # Telegram Bot Authorization Token
     bot = telegram.Bot('347715594:AAFxTVbmmV1pLhXAmnXLd72XWnxyYxqwlvE')
 
@@ -181,7 +181,6 @@ def verify():
         return request.args["hub.challenge"], 200
 
     return "Hello world", 200
-
 
 
 if __name__ == '__main__':
