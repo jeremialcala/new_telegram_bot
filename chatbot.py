@@ -5,18 +5,22 @@ from time import sleep
 import random
 import json
 from random import randint
+from flask import Flask, request
+import os
 
 # Enable logging
-logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+logging.basicConfig(format='- %(levelname)s - %(message)s',
                     level=logging.INFO)
 
+app = Flask(__name__)
 logger = logging.getLogger(__name__)
 update_id = None
 sticker = ['CAADAgADXgcAAnlc4gneIyGzwWLmPQI', 'CAADAQADFwADyIsGAAF1CK9t7qjAigI', 'CAADAQADIQADyIsGAAHaCFln7THl9QI',
            'CAADAgADYwADECECECX9ZCfAKlspAg',  'CAADAgADuwUAAvoLtggGKjKfVlb_hAI', 'CAADAQADIAADyIsGAAGwI-I5pMSEdQI',
            'CAADAQADLgADyIsGAAGPsGcNmlLjPQI']
 
-categorias = ['Saludos', 'Pregunta', 'Chanceo', 'Exclamacion', 'Photo_in', 'Photo', 'Afirmacion', 'Negacion', 'Advervios']
+categorias = ['Saludos', 'Pregunta', 'Chanceo', 'Exclamacion', 'Photo_in', 'Photo', 'Afirmacion', 'Negacion',
+              'Advervios']
 
 advervios = ['como', 'cómo']
 
@@ -63,15 +67,10 @@ def main():
     global update_id
     # Telegram Bot Authorization Token
     bot = telegram.Bot('347715594:AAFxTVbmmV1pLhXAmnXLd72XWnxyYxqwlvE')
-
-    # get the first pending update_id, this is so we can skip over it in case
-    # we get an "Unauthorized" exception.
     try:
         update_id = bot.get_updates()[0].update_id
-
     except IndexError:
         update_id = None
-
     while True:
         try:
             bot_resp(bot)
@@ -89,7 +88,8 @@ def bot_resp(bot, respuesta=""):
         update_id = update.update_id + 1
         if update.message:  # your bot can receive updates without messages
             # Reply to the message
-            logger.info("New message " + "from: " + str(update.message.chat.id))
+            logger.info("New message: " + str(update.message.chat))
+
             # logger.info(json.dumps(str(update.message), sort_keys=False, indent=4, separators=(',', ': ')))
             recep = update.message.chat.first_name
             tags = []
@@ -169,6 +169,21 @@ def bot_resp(bot, respuesta=""):
             logger.info("Response SEND: " + respuesta)
             # update.message.reply_text(youtube)
 
+
+@app.route('/', methods=['GET'])
+def verify():
+    # when the endpoint is registered as a webhook, it must echo back
+    # the 'hub.challenge' value it receives in the query arguments
+    if request.args.get("hub.mode") == "subscribe" and request.args.get("hub.challenge"):
+        if not request.args.get("hub.verify_token") == os.environ["VERIFY_TOKEN"]:
+            return "Verification token mismatch", 403
+        return request.args["hub.challenge"], 200
+
+    return "Hello world", 200
+
+
 if __name__ == '__main__':
     logger.info("Starting - BOT")
+    logger.info("TOKEN: " + os.environ['TOKEN'])
     main()
+
