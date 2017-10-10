@@ -175,12 +175,6 @@ def bot_resp(bot, respuesta=""):
             # update.message.reply_text(youtube)
 
 
-@app.route('/', methods=['GET'])
-def verify():
-
-    return "Hello world", 200
-
 if __name__ == '__main__':
     logger.info("Starting - BOT")
     main()
-    app.run(port=5050, debug=False)
