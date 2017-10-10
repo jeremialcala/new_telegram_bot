@@ -1,1 +1,1 @@
-web: python chatbot.py
+hello: python chatbot.py

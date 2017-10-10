@@ -6,6 +6,7 @@ import random
 import json
 from random import randint
 from flask import Flask, request
+import os
 
 # Enable logging
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
@@ -64,7 +65,7 @@ respuesta = ""
 def main():
     global update_id
     # Telegram Bot Authorization Token
-    bot = telegram.Bot('347715594:AAFxTVbmmV1pLhXAmnXLd72XWnxyYxqwlvE')
+    bot = telegram.Bot(os.environ['TOKEN'])
 
     # get the first pending update_id, this is so we can skip over it in case
     # we get an "Unauthorized" exception.
