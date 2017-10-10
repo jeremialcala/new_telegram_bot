@@ -1,1 +1,1 @@
-web: gunicorn chatbot:app --log-file=-
+web: python chatbot.py

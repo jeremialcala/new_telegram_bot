@@ -184,6 +184,6 @@ def verify():
 
 if __name__ == '__main__':
     logger.info("Starting - BOT")
-    logger.info("TOKEN: " + os.environ['TOKEN'])
+    # logger.info("TOKEN: " + os.environ['TOKEN'])
     main()
 
