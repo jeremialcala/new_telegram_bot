@@ -19,7 +19,8 @@ sticker = ['CAADAgADXgcAAnlc4gneIyGzwWLmPQI', 'CAADAQADFwADyIsGAAF1CK9t7qjAigI',
            'CAADAgADYwADECECECX9ZCfAKlspAg',  'CAADAgADuwUAAvoLtggGKjKfVlb_hAI', 'CAADAQADIAADyIsGAAGwI-I5pMSEdQI',
            'CAADAQADLgADyIsGAAGPsGcNmlLjPQI']
 
-categorias = ['Saludos', 'Pregunta', 'Chanceo', 'Exclamacion', 'Photo_in', 'Photo', 'Afirmacion', 'Negacion', 'Advervios']
+categorias = ['Saludos', 'Pregunta', 'Chanceo', 'Exclamacion', 'Photo_in', 'Photo', 'Afirmacion', 'Negacion',
+              'Advervios']
 
 advervios = ['como', 'cómo']
 
@@ -186,5 +187,6 @@ def verify():
 if __name__ == '__main__':
     logger.info("Starting - BOT")
     logger.info("TOKEN: " + os.environ['TOKEN'])
-    main()
+    app.run(port=5050, debug=False)
+    # main()
 
