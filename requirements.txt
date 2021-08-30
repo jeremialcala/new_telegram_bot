@@ -3,4 +3,4 @@ telegram
 future>=0.16.0
 certifi
 urllib3
-Flask==0.11.1
+Flask==1.0
